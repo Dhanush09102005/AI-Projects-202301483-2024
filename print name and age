@@ -1,0 +1,3 @@
+name = input()
+age = input()
+print('Hello world to '+ name + ', ' + age + ' years old.')
