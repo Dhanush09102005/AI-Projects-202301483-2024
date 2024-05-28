@@ -1,0 +1,6 @@
+import math
+
+nums = [0, 1, 2, 3, 4]
+for i in range(len(nums)):
+    if math.sqrt(nums[i])%2==0:
+        print(nums[i], " ")
