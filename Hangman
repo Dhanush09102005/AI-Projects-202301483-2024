@@ -1,0 +1,45 @@
+import random as r
+
+def display_hangman(left):
+    fig = ["\n ____\n|     \n|    O\n|       \n|     \n|       \n",
+           "\n ____\n|     \n|    O\n|    |  \n|    |\n|       \n",
+           "\n ____\n|     \n|    O\n|   /|  \n|    |\n|       \n",
+           "\n ____\n|     \n|    O\n|   /|\\\n|    |\n|       \n",
+           "\n ____\n|     \n|    O\n|   /|\\\n|    |\n|   /   \n",
+           "\n ____\n|     \n|    O\n|   /|\\\n|    |\n|   / \\\n",
+           "\n ____\n|    |\n|    O\n|   /|\\\n|    |\n|   / \\\n"]
+    return fig[6 - left]
+
+def hangman():
+    words = ['ironman', 'captainamerica', 'hawkeye', 'blackwidow', 'thanos']
+    word = r.choice(words)
+    dash = ['_'] * len(word)
+    left = 6
+    correct = []
+
+    print("Welcome to Hangman!")
+    print("Guess the word:", ' '.join(dash))
+
+    while left > 0 and '_' in dash:
+        print(display_hangman(left))
+        guess = input("Guess a letter in lowercase: ")
+
+        if guess in correct:
+            print("You've already guessed this letter.")
+            continue
+        else:
+            correct.append(guess)
+
+        if guess in word:
+            dash = [char if char == guess or char_dash != '_' else '_' for char, char_dash in zip(word, dash)]
+            print("Correct guess!")
+        else:
+            left -= 1
+            print("Incorrect guess!")
+
+        print("Word:", ' '.join(dash))
+        print("Attempts left:", left)
+
+    print("Congratulations! You guessed the word:", word) if '_' not in dash else print("You're out of attempts! The word was:", word)
+
+hangman()
